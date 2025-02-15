@@ -1,0 +1,36 @@
+# Node.js
+node_modules/
+npm-debug.log
+
+# Env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+
+# Dependency directories
+.pnp
+.pnp.js
+
+# React build
+build/
+
+# Production
+production/
+
+# Coverage directory
+coverage/
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
