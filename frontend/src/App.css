@@ -17,6 +17,9 @@ body {
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   padding: 20px;
+  width: 100%;
+  max-width: 600px; /* Adjust max-width as needed */
+  box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
 .App-header {
@@ -40,12 +43,11 @@ body {
 
 .App-content {
   width: 100%;
-  max-width: 500px;
-  margin: 20px auto;
   padding: 20px;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
 .Login-container,
@@ -54,6 +56,10 @@ body {
   background: linear-gradient(135deg, #ff99cc, #99ccff);
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin: 0 auto; /* Center the container */
+  width: 100%;
+  max-width: 500px; /* Adjust max-width as needed */
+  box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
 .Login-container h2,
