@@ -63,7 +63,7 @@ const Chat = ({ onLogout }) => {
       <div className="Chat-messages">
         {messages.map((msg, index) => (
           <div key={index} className="Chat-message">
-            <pre>{msg}</pre>
+            <p>{msg}</p>
           </div>
         ))}
         <div ref={messagesEndRef} />

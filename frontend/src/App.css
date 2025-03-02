@@ -151,6 +151,7 @@ body {
   max-height: 60vh; /* Increased for more visibility */
   min-height: 20vh; /* Minimum height to avoid collapsing */
   overflow-y: auto;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
   width: 100%;
   margin-bottom: 1rem;
   padding: 1rem;
@@ -185,11 +186,13 @@ body {
   margin: 0.5rem 0;
   border-radius: 15px;
   color: #f5e6cc;
-  word-wrap: break-word; /* Ensure long words break */
-  white-space: pre-wrap; /* Preserve line breaks and wrap text */
-  font-size: 1rem; /* Ensure readability */
-  max-width: 100%; /* Prevent overflow beyond container */
-  overflow-wrap: break-word; /* Modern alternative to word-wrap */
+  font-size: 1rem;
+  width: 100%; /* Force full width of container */
+  max-width: 100%; /* Prevent exceeding container */
+  white-space: normal; /* Allow text to wrap naturally */
+  overflow-wrap: break-word; /* Break long words */
+  word-break: break-word; /* Additional breaking for compatibility */
+  overflow: hidden; /* Hide any overflow */
 }
 
 /* Error and Success Messages */
