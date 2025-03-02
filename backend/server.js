@@ -61,3 +61,13 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+socket.on('sendMessage', async (message) => {
+  try {
+    const response = await callMistralAPI(message);
+    console.log('Sending full response:', response); // Log full response
+    io.emit('receiveMessage', response);
+  } catch (error) {
+    io.emit('receiveMessage', 'Sorry, I couldn\'t process that.');
+  }
+});
