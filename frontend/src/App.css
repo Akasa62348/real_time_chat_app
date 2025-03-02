@@ -148,9 +148,9 @@ body {
 
 /* Messages Area */
 .Chat-messages {
-  max-height: 60vh; /* Increased for more visibility */
+  max-height: 60vh; /* Maximum height for scrolling */
   min-height: 20vh; /* Minimum height to avoid collapsing */
-  overflow-y: auto;
+  overflow-y: auto; /* Enable vertical scrolling */
   overflow-x: hidden; /* Prevent horizontal scrolling */
   width: 100%;
   margin-bottom: 1rem;
@@ -187,12 +187,13 @@ body {
   border-radius: 15px;
   color: #f5e6cc;
   font-size: 1rem;
-  width: 100%; /* Force full width of container */
+  width: 100%; /* Full width of container */
   max-width: 100%; /* Prevent exceeding container */
-  white-space: normal; /* Allow text to wrap naturally */
+  white-space: normal; /* Allow natural wrapping */
   overflow-wrap: break-word; /* Break long words */
-  word-break: break-word; /* Additional breaking for compatibility */
-  overflow: hidden; /* Hide any overflow */
+  word-break: break-word; /* Additional breaking */
+  overflow: visible; /* Ensure full content is visible */
+  max-height: none; /* Remove height restriction */
 }
 
 /* Error and Success Messages */

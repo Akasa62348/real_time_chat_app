@@ -2,10 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import '../App.css';
 
-// Use the deployed backend URL
 const socket = io('https://pradhanmantri-ka-chatbot.onrender.com', {
   reconnection: true,
-  transports: ['websocket', 'polling'], // Ensure both transports are available
+  transports: ['websocket', 'polling'],
 });
 
 const Chat = ({ onLogout }) => {
@@ -13,6 +12,7 @@ const Chat = ({ onLogout }) => {
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState('');
   const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null); // Ref for the container
 
   useEffect(() => {
     socket.on('connect', () => {
@@ -37,7 +37,10 @@ const Chat = ({ onLogout }) => {
   }, []);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Scroll to the bottom of the container
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   }, [messages]);
 
   const sendMessage = () => {
@@ -60,13 +63,13 @@ const Chat = ({ onLogout }) => {
   return (
     <div className="Chat-container">
       <h2>Divine Chat Room</h2>
-      <div className="Chat-messages">
+      <div className="Chat-messages" ref={messagesContainerRef}>
         {messages.map((msg, index) => (
           <div key={index} className="Chat-message">
             <p>{msg}</p>
           </div>
         ))}
-        <div ref={messagesEndRef} />
+        <div ref={messagesEndRef} /> {/* Kept for reference */}
       </div>
       <input
         type="text"
