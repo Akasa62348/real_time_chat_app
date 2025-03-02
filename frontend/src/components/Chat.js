@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import '../App.css';
 
-const socket = io(process.env.REACT_APP_API_URL, {
+// Use the deployed backend URL
+const socket = io('https://pradhanmantri-ka-chatbot.onrender.com', {
   reconnection: true,
+  transports: ['websocket', 'polling'], // Ensure both transports are available
 });
 
 const Chat = ({ onLogout }) => {
@@ -18,8 +20,8 @@ const Chat = ({ onLogout }) => {
     });
 
     socket.on('receiveMessage', (message) => {
-      console.log('Received message:', message); // Debug log
-      setMessages((prevMessages) => [...prevMessages, `AI: ${message}`]); // Prefix AI replies
+      console.log('Received full message:', message);
+      setMessages((prevMessages) => [...prevMessages, `AI: ${message}`]);
     });
 
     socket.on('connect_error', (err) => {
@@ -43,7 +45,7 @@ const Chat = ({ onLogout }) => {
       setError('Message cannot be empty');
       return;
     }
-    console.log('Sending message:', message);
+    console.log('Sending full message:', message);
     socket.emit('sendMessage', message);
     setMessages((prevMessages) => [...prevMessages, `You: ${message}`]);
     setMessage('');
@@ -61,7 +63,7 @@ const Chat = ({ onLogout }) => {
       <div className="Chat-messages">
         {messages.map((msg, index) => (
           <div key={index} className="Chat-message">
-            <p>{msg}</p>
+            <pre>{msg}</pre>
           </div>
         ))}
         <div ref={messagesEndRef} />

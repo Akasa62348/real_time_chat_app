@@ -10,15 +10,15 @@ const Signup = ({ onSignup }) => {
 
   const handleSignup = async () => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/register`, {
+      const response = await axios.post('https://pradhanmantri-ka-chatbot.onrender.com/api/auth/register', {
         username,
         password,
       });
-      setSuccess(response.data.msg); // "User registered successfully"
+      setSuccess(response.data.msg);
       setError('');
       setTimeout(() => {
-        onSignup(); // Redirect to login after successful signup
-      }, 1500); // Delay to show success message
+        onSignup();
+      }, 1500);
     } catch (error) {
       console.error('Signup failed', error);
       setError(error.response?.data?.msg || 'Signup failed. Please try again.');
