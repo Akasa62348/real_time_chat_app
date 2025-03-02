@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // Ensure useEffect is imported
 import io from 'socket.io-client';
 import '../App.css';
 
@@ -12,7 +12,7 @@ const Chat = ({ onLogout }) => {
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState('');
   const messagesEndRef = useRef(null);
-  const messagesContainerRef = useRef(null); // Ref for the container
+  const messagesContainerRef = useRef(null);
 
   useEffect(() => {
     socket.on('connect', () => {
@@ -37,8 +37,8 @@ const Chat = ({ onLogout }) => {
   }, []);
 
   useEffect(() => {
-    // Scroll to the bottom of the container
     if (messagesContainerRef.current) {
+      console.log('Scrolling to bottom, height:', messagesContainerRef.current.scrollHeight);
       messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
   }, [messages]);
@@ -69,7 +69,7 @@ const Chat = ({ onLogout }) => {
             <p>{msg}</p>
           </div>
         ))}
-        <div ref={messagesEndRef} /> {/* Kept for reference */}
+        <div ref={messagesEndRef} />
       </div>
       <input
         type="text"

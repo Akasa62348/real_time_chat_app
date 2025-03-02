@@ -193,7 +193,16 @@ body {
   overflow-wrap: break-word; /* Break long words */
   word-break: break-word; /* Additional breaking */
   overflow: visible; /* Ensure full content is visible */
-  max-height: none; /* Remove height restriction */
+  max-height: none; /* No height restriction */
+}
+
+/* Style for p tags inside Chat-message */
+.Chat-message p {
+  margin: 0; /* Remove default margin */
+  white-space: normal; /* Ensure wrapping */
+  overflow: visible; /* No clipping */
+  max-height: none; /* No height limit */
+  width: 100%; /* Match parent width */
 }
 
 /* Error and Success Messages */
