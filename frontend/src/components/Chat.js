@@ -1,32 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import '../App.css';
 
-const socket = io(process.env.REACT_APP_API_URL);
+const socket = io(process.env.REACT_APP_API_URL, {
+  reconnection: true,
+});
 
-const Chat = () => {
+const Chat = ({ onLogout }) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState('');
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
+    socket.on('connect', () => {
+      console.log('Socket connected:', socket.id);
+    });
+
     socket.on('receiveMessage', (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
+      console.log('Received message:', message); // Debug log
+      setMessages((prevMessages) => [...prevMessages, `AI: ${message}`]); // Prefix AI replies
+    });
+
+    socket.on('connect_error', (err) => {
+      console.error('Socket connection error:', err);
+      setError('Failed to connect to the server.');
     });
 
     return () => {
       socket.off('receiveMessage');
+      socket.off('connect');
+      socket.off('connect_error');
     };
   }, []);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   const sendMessage = () => {
     if (message.trim() === '') {
       setError('Message cannot be empty');
       return;
     }
+    console.log('Sending message:', message);
     socket.emit('sendMessage', message);
+    setMessages((prevMessages) => [...prevMessages, `You: ${message}`]);
     setMessage('');
     setError('');
+  };
+
+  const handleLogout = () => {
+    socket.disconnect();
+    onLogout();
   };
 
   return (
@@ -38,6 +64,7 @@ const Chat = () => {
             <p>{msg}</p>
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
       <input
         type="text"
@@ -47,6 +74,9 @@ const Chat = () => {
       />
       {error && <p className="error-message">{error}</p>}
       <button onClick={sendMessage}>Send to the Universe</button>
+      <button onClick={handleLogout} className="logout-button">
+        Leave the Divine Realm
+      </button>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
@@ -14,7 +15,7 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ msg: 'User already exists' });
     }
 
-    // Store the password as plain text for testing
+    // For testing, store the password as plain text
     const newUser = new User({ username, password });
     await newUser.save();
 
@@ -31,13 +32,13 @@ router.post('/login', async (req, res) => {
   console.log("Received login request for:", { username, password });
 
   try {
-    const user = await User.findOne({ username: username.trim() });
+    const user = await User.findOne({ username });
     if (!user) {
       return res.status(400).json({ msg: 'User not found' });
     }
 
     // Compare plain text passwords for testing
-    if (password.trim() !== user.password) {
+    if (password !== user.password) {
       return res.status(400).json({ msg: 'Invalid credentials' });
     }
 

@@ -1,135 +1,265 @@
-/* src/App.css */
+/* Reset default styles for consistency */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #ffcc66, #ff99cc, #99ccff);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background: linear-gradient(135deg, #2b1d4d, #4a2e8c); /* Mystical gradient */
+  color: #f5e6cc; /* Soft golden text */
+  min-height: 100vh;
 }
 
+/* App Container */
 .App {
-  text-align: center;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
   padding: 20px;
-  width: 100%;
-  max-width: 600px; /* Adjust max-width as needed */
-  box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
+/* Header */
 .App-header {
-  background-color: #1e3d59;
-  padding: 20px;
-  color: #ffcc66;
-  border-bottom: 2px solid #ffcc66;
-  border-radius: 10px 10px 0 0;
+  text-align: center;
+  padding: 2rem 1rem;
+  background: rgba(0, 0, 0, 0.3); /* Semi-transparent overlay */
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 800px;
 }
 
 .App-logo {
-  height: 50px;
-  filter: invert(1);
+  height: 10vmin;
+  pointer-events: none;
+  animation: float 3s ease-in-out infinite; /* Subtle floating animation */
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.App-header p {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  color: #f5d576; /* Golden glow */
+  text-shadow: 0 0 10px rgba(245, 213, 118, 0.7);
 }
 
 .App-link {
-  color: #ffcc66;
+  color: #b19cd9; /* Light purple */
   text-decoration: none;
   font-weight: bold;
 }
 
+.App-link:hover {
+  color: #f5e6cc;
+  text-shadow: 0 0 5px #f5e6cc;
+}
+
+/* Content Container */
 .App-content {
   width: 100%;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box; /* Ensure padding is included in the width */
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.Login-container,
-.Chat-container {
-  padding: 20px;
-  background: linear-gradient(135deg, #ff99cc, #99ccff);
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  margin: 0 auto; /* Center the container */
+/* Login, Signup, and Chat Containers */
+.Login-container, .Signup-container, .Chat-container {
+  background: rgba(43, 29, 77, 0.9); /* Dark purple with transparency */
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px; /* Increased for chat readability */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Space between elements */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.Login-container h2, .Signup-container h2, .Chat-container h2 {
+  color: #f5d576;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  text-shadow: 0 0 10px rgba(245, 213, 118, 0.5);
+}
+
+/* Input Fields */
+.Login-container input, .Signup-container input, .Chat-container input {
   width: 100%;
-  max-width: 500px; /* Adjust max-width as needed */
-  box-sizing: border-box; /* Ensure padding is included in the width */
-}
-
-.Login-container h2,
-.Chat-container h2 {
-  margin-bottom: 20px;
-  color: #1e3d59;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-}
-
-.Login-container input,
-.Chat-container input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border: 1px solid #ffcc66;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 16px;
-}
-
-.Login-container button,
-.Chat-container button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
   border: none;
-  border-radius: 4px;
-  background-color: #1e3d59;
-  color: #ffcc66;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f5e6cc;
+  font-size: 1rem;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.Login-container input:focus, .Signup-container input:focus, .Chat-container input:focus {
+  box-shadow: 0 0 10px rgba(181, 156, 217, 0.7); /* Purple glow */
+}
+
+/* Buttons */
+.Login-container button, .Signup-container button, .Chat-container button {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #f5d576, #b19cd9); /* Gold to purple gradient */
+  color: #2b1d4d;
+  font-size: 1rem;
   font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-.Login-container button:hover,
-.Chat-container button:hover {
-  background-color: #15314b;
+.Login-container button:hover, .Signup-container button:hover, .Chat-container button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(245, 213, 118, 0.7);
 }
 
+/* Logout Button */
+.Chat-container .logout-button {
+  background: linear-gradient(90deg, #ff6b6b, #d94f4f); /* Red gradient for logout */
+  color: #fff;
+}
+
+.Chat-container .logout-button:hover {
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.7);
+}
+
+/* Messages Area */
 .Chat-messages {
-  border: 1px solid #ffcc66;
-  padding: 10px;
-  height: 300px;
-  overflow-y: scroll;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.8);
+  max-height: 60vh; /* Increased for more visibility */
+  min-height: 20vh; /* Minimum height to avoid collapsing */
+  overflow-y: auto;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #b19cd9 #2b1d4d; /* Custom scrollbar */
 }
 
+/* Webkit Scrollbar (Chrome, Safari) */
+.Chat-messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.Chat-messages::-webkit-scrollbar-track {
+  background: #2b1d4d;
+}
+
+.Chat-messages::-webkit-scrollbar-thumb {
+  background: #b19cd9;
+  border-radius: 4px;
+}
+
+.Chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #f5e6cc;
+}
+
+/* Chat Message Styling */
 .Chat-message {
-  padding: 10px;
-  border-bottom: 1px solid #ffcc66;
+  background: rgba(181, 156, 217, 0.3); /* Light purple bubble */
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border-radius: 15px;
+  color: #f5e6cc;
+  word-wrap: break-word; /* Ensure long words break */
+  white-space: pre-wrap; /* Preserve line breaks and wrap text */
+  font-size: 1rem; /* Ensure readability */
+  max-width: 100%; /* Prevent overflow beyond container */
+  overflow-wrap: break-word; /* Modern alternative to word-wrap */
 }
 
-.Chat-message:last-child {
-  border-bottom: none;
-}
-
-.Chat-message p {
-  margin: 0;
-  font-size: 14px;
-  color: #1e3d59;
-}
-
+/* Error and Success Messages */
 .error-message {
-  color: #d9534f;
-  margin-top: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #d9534f;
+  color: #ff6b6b;
+  text-align: center;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.success-message {
+  color: #76f5a3;
+  text-align: center;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+/* Toggle Link */
+.toggle-link {
+  margin-top: 1rem;
+  color: #b19cd9;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.toggle-link span:hover {
+  color: #f5e6cc;
+  text-shadow: 0 0 5px #f5e6cc;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .App-header {
+    padding: 1rem;
+  }
+
+  .App-header p {
+    font-size: 1.2rem;
+  }
+
+  .App-logo {
+    height: 8vmin;
+  }
+
+  .Login-container, .Signup-container, .Chat-container {
+    width: 95%;
+    padding: 1.5rem;
+    max-width: 100%; /* Full width on mobile */
+  }
+
+  .Chat-messages {
+    max-height: 50vh; /* Adjusted for mobile */
+    min-height: 15vh;
+  }
+
+  .Chat-message {
+    font-size: 0.9rem; /* Slightly smaller on mobile */
+  }
+
+  .Login-container h2, .Signup-container h2, .Chat-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .Login-container input, .Signup-container input, .Chat-container input {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .Login-container button, .Signup-container button, .Chat-container button {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
 }
